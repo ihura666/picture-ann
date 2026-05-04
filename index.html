@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head><title>Maze WASM Reward</title></head>
+<body>
+<h2>Maze WASM Reward System</h2>
+<div id="output">Loading...</div>
+
+<script>
+fetch('reward.wasm').then(response =>
+  response.arrayBuffer()
+).then(bytes =>
+  WebAssembly.instantiate(bytes)
+).then(results => {
+  const reward = results.instance.exports.rewardUser(8, 1);
+  document.getElementById("output").textContent = 
+    "User reward: " + reward + " MAZE tokens";
+});
+</script>
+</body>
+</html>
